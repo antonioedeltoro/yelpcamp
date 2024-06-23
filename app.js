@@ -18,7 +18,6 @@ const mongoSanitize = require("express-mongo-sanitize");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
-
 const MongoStore = require("connect-mongo");
 
 // Database connection string
@@ -83,7 +82,6 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
-// app.use(helmet());
 
 // Content Security Policy configuration
 const scriptSrcUrls = [
