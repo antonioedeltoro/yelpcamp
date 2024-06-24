@@ -27,6 +27,7 @@
     "method-override": "^3.0.0",
     "mongodb": "^6.7.0",
     "mongoose": "^5.13.22",
+    "mongosh": "^2.2.10",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "node": "^20.15.0",
