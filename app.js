@@ -20,22 +20,27 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const MongoStore = require("connect-mongo");
 
-// Database connection string
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
+const dbUser = process.env.DB_USER;
+const dbPass = process.env.DB_PASS;
+const dbName = process.env.DB_NAME;
 
-// MongoDB connection setup
-mongoose.connect(dbUrl, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+console.log("DB_USER:", dbUser);
+console.log("DB_PASS:", dbPass);
+console.log("DB_NAME:", dbName);
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
-});
+const dbUrl = `mongodb+srv://${dbUser}:${dbPass}@ac-ditmdg4-shard-00-00.fxmtgwe.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+
+mongoose
+  .connect(dbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((err) => {
+    console.error("Connection error", err);
+  });
 
 const app = express();
 
