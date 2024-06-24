@@ -1,79 +1,78 @@
+// Set the access token for Mapbox
 mapboxgl.accessToken = mapToken;
+
+// Initialize a new Mapbox map
 const map = new mapboxgl.Map({
-  container: "cluster-map",
-  // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-  style: "mapbox://styles/mapbox/light-v11",
-  center: [-103.5917, 40.6699],
-  zoom: 3,
+  container: "cluster-map", // ID of the HTML element to contain the map
+  style: "mapbox://styles/mapbox/light-v11", // Map style to use
+  center: [-103.5917, 40.6699], // Initial center of the map [longitude, latitude]
+  zoom: 3, // Initial zoom level of the map
 });
 
+// Add navigation control (zoom and rotation controls) to the map
 const nav = new mapboxgl.NavigationControl();
-map.addControl(nav, "top-right");
+map.addControl(nav, "top-right"); // Position the navigation controls at the top-right corner
 
+// Event listener for when the map has loaded all necessary resources
 map.on("load", () => {
-  // Add a new source from our GeoJSON data and
-  // set the 'cluster' option to true. GL-JS will
-  // add the point_count property to your source data.
+  // Add a new data source to the map for campgrounds with clustering enabled
   map.addSource("campgrounds", {
-    type: "geojson",
-    // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-    // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-    data: campgrounds,
-    cluster: true,
-    clusterMaxZoom: 14, // Max zoom to cluster points on
-    clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
+    type: "geojson", // Type of data source
+    data: campgrounds, // GeoJSON data for the campgrounds
+    cluster: true, // Enable clustering of data points
+    clusterMaxZoom: 14, // Max zoom level for clustering
+    clusterRadius: 50, // Radius of each cluster when clustering points
   });
 
+  // Add a layer to display clusters of campgrounds
   map.addLayer({
     id: "clusters",
     type: "circle",
     source: "campgrounds",
-    filter: ["has", "point_count"],
+    filter: ["has", "point_count"], // Only show clusters (not individual points)
     paint: {
-      // Use step expressions (https://docs.mapbox.com/style-spec/reference/expressions/#step)
-      // with three steps to implement three types of circles:
-      //   * Blue, 20px circles when point count is less than 100
-      //   * Yellow, 30px circles when point count is between 100 and 750
-      //   * Pink, 40px circles when point count is greater than or equal to 750
+      // Use step expressions to style the clusters differently based on the number of points in the cluster
       "circle-color": [
         "step",
         ["get", "point_count"],
-        "#0BCD4f",
+        "#0BCD4f", // Green for clusters with fewer than 10 points
         10,
-        "#2196F3",
+        "#2196F3", // Blue for clusters with 10-29 points
         30,
-        "#3F51B5",
+        "#3F51B5", // Purple for clusters with 30 or more points
       ],
-      "circle-radius": ["step", ["get", "point_count"], 15, 10, 20, 30, 25],
+      "circle-radius": ["step", ["get", "point_count"], 15, 10, 20, 30, 25], // Radius of the clusters
     },
   });
 
+  // Add a layer to display the number of points in each cluster
   map.addLayer({
     id: "cluster-count",
     type: "symbol",
     source: "campgrounds",
-    filter: ["has", "point_count"],
+    filter: ["has", "point_count"], // Only show cluster counts
     layout: {
-      "text-field": ["get", "point_count_abbreviated"],
-      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-      "text-size": 12,
+      "text-field": ["get", "point_count_abbreviated"], // Display the abbreviated point count
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"], // Font for the text
+      "text-size": 12, // Size of the text
     },
   });
 
+  // Add a layer to display individual unclustered points
   map.addLayer({
     id: "unclustered-point",
     type: "circle",
     source: "campgrounds",
-    filter: ["!", ["has", "point_count"]],
+    filter: ["!", ["has", "point_count"]], // Only show unclustered points
     paint: {
-      "circle-color": "#11b4da",
-      "circle-radius": 4,
-      "circle-stroke-width": 1,
-      "circle-stroke-color": "#fff",
+      "circle-color": "#11b4da", // Color of the points
+      "circle-radius": 4, // Radius of the points
+      "circle-stroke-width": 1, // Width of the stroke around the points
+      "circle-stroke-color": "#fff", // Color of the stroke around the points
     },
   });
 
-  // inspect a cluster on click
+  // Event listener for clicking on clusters
   map.on("click", "clusters", (e) => {
     const features = map.queryRenderedFeatures(e.point, {
       layers: ["clusters"],
@@ -84,6 +83,7 @@ map.on("load", () => {
       .getClusterExpansionZoom(clusterId, (err, zoom) => {
         if (err) return;
 
+        // Zoom into the cluster when clicked
         map.easeTo({
           center: features[0].geometry.coordinates,
           zoom: zoom,
@@ -91,27 +91,26 @@ map.on("load", () => {
       });
   });
 
-  // When a click event occurs on a feature in
-  // the unclustered-point layer, open a popup at
-  // the location of the feature, with
-  // description HTML from its properties.
+  // Event listener for clicking on unclustered points
   map.on("click", "unclustered-point", (e) => {
     const { popUpMarkup } = e.features[0].properties;
     const coordinates = e.features[0].geometry.coordinates.slice();
 
-    // Ensure that if the map is zoomed out such that
-    // multiple copies of the feature are visible, the
-    // popup appears over the copy being pointed to.
+    // Ensure that the popup appears over the correct copy of the feature
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
+    // Create a popup at the location of the feature
     new mapboxgl.Popup().setLngLat(coordinates).setHTML(popUpMarkup).addTo(map);
   });
 
+  // Change the cursor to a pointer when hovering over clusters
   map.on("mouseenter", "clusters", () => {
     map.getCanvas().style.cursor = "pointer";
   });
+
+  // Change the cursor back when not hovering over clusters
   map.on("mouseleave", "clusters", () => {
     map.getCanvas().style.cursor = "";
   });

@@ -1,19 +1,29 @@
 (function () {
-    'use strict'
+  "use strict";
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.validated-form')
+  // Initialize Bootstrap custom file input
+  bsCustomFileInput.init();
 
-    // Loop over them and prevent submission
-    Array.from(forms)
-        .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+  // Fetch all forms with the 'validated-form' class
+  const forms = document.querySelectorAll(".validated-form");
 
-                form.classList.add('was-validated')
-            }, false)
-        })
-})()
+  // Loop over each form
+  Array.from(forms).forEach(function (form) {
+    // Add submit event listener to each form
+    form.addEventListener(
+      "submit",
+      function (event) {
+        // Check if the form is not valid
+        if (!form.checkValidity()) {
+          // Prevent form submission
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        // Add 'was-validated' class to the form to apply Bootstrap validation styles
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();
