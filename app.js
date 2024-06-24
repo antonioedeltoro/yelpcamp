@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -14,33 +10,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
-const MongoStore = require("connect-mongo");
-
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASS;
-const dbName = process.env.DB_NAME;
-
-console.log("DB_USER:", dbUser);
-console.log("DB_PASS:", dbPass);
-console.log("DB_NAME:", dbName);
-
-const dbUrl = `mongodb+srv://${dbUser}:${dbPass}@ac-ditmdg4-shard-00-00.fxmtgwe.mongodb.net/${dbName}?retryWrites=true&w=majority`;
-
-mongoose
-  .connect(dbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Database connected");
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
-  });
 
 const app = express();
 
