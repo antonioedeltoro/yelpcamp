@@ -1,42 +1,36 @@
-/* Apply full height of the viewport to the body */
 body {
-  height: 100vh; /* 100% of the viewport height */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    /* Semi-transparent black overlay */
-      url("https://images.unsplash.com/photo-1602391833977-358a52198938?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Background image URL */
-  background-size: cover; /* Cover the entire background */
-  background-position: center; /* Center the background image */
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5); /* Inset shadow for depth effect */
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-size: cover;
+    background-position: center;
+    text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
-
-/* Limit maximum width of the container */
 .cover-container {
-  max-width: 60vw; /* Maximum width of 60% viewport width */
+  max-width: 60vw;
 }
 
-/* Styling for navigation links */
 .nav-link {
-  padding: 0.25rem 0; /* Padding for top and bottom */
-  font-weight: 600; /* Bold font weight */
-  color: rgba(255, 255, 255, 0.5); /* Semi-transparent white color */
-  margin-left: 1rem; /* Left margin */
-  border-bottom: 0.25rem solid transparent; /* Transparent bottom border */
+    padding: 0.25rem 0;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
 }
 
-/* Hover state for navigation links */
-.nav-link:hover {
-  color: rgba(255, 255, 255, 0.5); /* Semi-transparent white color on hover */
-  border-bottom-color: rgba(
-    255,
-    255,
-    255,
-    0.5
-  ); /* Semi-transparent white bottom border on hover */
+.nav-link:hover{
+    color: rgba(255,255,255,0.5);
+    border-bottom-color:rgba(255,255,255,0.5);
 }
 
-/* Active state for navigation links */
 .nav-link.active {
-  color: white; /* White color for active link */
-  border-bottom-color: white; /* White bottom border for active link */
+    color: white;
+    border-bottom-color:white;
+
+}
+
+.btn-secondary, .btn-secondary:hover{
+    color: #333;
+    text-shadow: none;
 }

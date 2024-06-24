@@ -1,31 +1,18 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const catchAsync = require("../utils/catchAsync");
-const User = require("../models/user"); // Assuming this imports your User model
-const users = require("../controllers/users"); // Assuming this imports your users controller
-const passport = require("passport");
-const { storeReturnTo } = require("../middleware"); // Assuming this imports storeReturnTo middleware
+const passport = require('passport');
+const catchAsync = require('../utils/catchAsync');
+const User = require('../models/user');
+const users = require('../controllers/users');
 
-// Register route
-router
-  .route("/register")
-  .get(users.renderRegister) // Render registration form
-  .post(catchAsync(users.register)); // Handle registration form submission
+router.route('/register')
+    .get(users.renderRegister)
+    .post(catchAsync(users.register));
 
-// Login route
-router
-  .route("/login")
-  .get(users.renderLogin) // Render login form
-  .post(
-    storeReturnTo, // Save returnTo value from session to res.locals
-    passport.authenticate("local", {
-      failureFlash: true, // Enable flash messages for authentication failures
-      failureRedirect: "/login", // Redirect to /login on authentication failure
-    }),
-    users.login // Handle successful login
-  );
+router.route('/login')
+    .get(users.renderLogin)
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login)
 
-// Logout route
-router.get("/logout", users.logout); // Handle user logout
+router.get('/logout', users.logout)
 
 module.exports = router;
