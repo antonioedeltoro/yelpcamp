@@ -1,6 +1,8 @@
 <% if (success && success.length) { %>
+<!-- Display success message if 'success' exists and has content -->
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   <%= success %>
+  <!-- Display the success message -->
   <button
     type="button"
     class="btn-close"
@@ -8,9 +10,11 @@
     aria-label="Close"
   ></button>
 </div>
-<% } %><% if (error && error.length) { %>
+<% } %> <% if (error && error.length) { %>
+<!-- Display error message if 'error' exists and has content -->
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   <%= error %>
+  <!-- Display the error message -->
   <button
     type="button"
     class="btn-close"

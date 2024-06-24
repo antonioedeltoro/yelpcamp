@@ -1,6 +1,9 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
+    <!-- Brand/logo link -->
     <a class="navbar-brand" href="#">YelpCamp</a>
+
+    <!-- Toggle button for collapsed menu on smaller screens -->
     <button
       class="navbar-toggler"
       type="button"
@@ -12,17 +15,24 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Collapsible menu content -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+        <!-- Main navigation links -->
         <a class="nav-link" href="/">Home</a>
         <a class="nav-link" href="/campgrounds">Campgrounds</a>
         <a class="nav-link" href="/campgrounds/new">New Campground</a>
       </div>
+
+      <!-- Right-aligned navigation links -->
       <div class="navbar-nav ms-auto">
-        <% if(!currentUser) {%>
+        <% if(!currentUser) { %>
+        <!-- Show login and register links if no user is logged in -->
         <a class="nav-link" href="/login">Login</a>
         <a class="nav-link" href="/register">Register</a>
-        <% } else {%>
+        <% } else { %>
+        <!-- Show logout link if a user is logged in -->
         <a class="nav-link" href="/logout">Logout</a>
         <% } %>
       </div>
