@@ -1,28 +1,31 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const catchAsync = require('../utils/catchAsync');
-const User = require('../models/user');
-const users = require('../controllers/users');
-const passport = require('passport');
-const { storeReturnTo } = require('../middleware'); //place at the top, this is a passport.js update requirement.
+const catchAsync = require("../utils/catchAsync");
+const User = require("../models/user"); // Assuming this imports your User model
+const users = require("../controllers/users"); // Assuming this imports your users controller
+const passport = require("passport");
+const { storeReturnTo } = require("../middleware"); // Assuming this imports storeReturnTo middleware
 
+// Register route
+router
+  .route("/register")
+  .get(users.renderRegister) // Render registration form
+  .post(catchAsync(users.register)); // Handle registration form submission
 
-router.route('/register')
-    .get(users.renderRegister)
-    .post(catchAsync(users.register))
+// Login route
+router
+  .route("/login")
+  .get(users.renderLogin) // Render login form
+  .post(
+    storeReturnTo, // Save returnTo value from session to res.locals
+    passport.authenticate("local", {
+      failureFlash: true, // Enable flash messages for authentication failures
+      failureRedirect: "/login", // Redirect to /login on authentication failure
+    }),
+    users.login // Handle successful login
+  );
 
-router.route('/login')
-    .get(users.renderLogin)
-    .post(
-    // use the storeReturnTo middleware to save the returnTo value from session to res.locals
-    storeReturnTo,
-    // passport.authenticate logs the user in and clears req.session
-    passport.authenticate('local', 
-        {failureFlash: true, 
-        failureRedirect: '/login'}), 
-        users.login)
-    // Now we can use res.locals.returnTo to redirect the user after login
-
-router.get('/logout', users.logout)
+// Logout route
+router.get("/logout", users.logout); // Handle user logout
 
 module.exports = router;
