@@ -70,6 +70,7 @@
   </div>
   <div class="col-6">
     <% if (currentUser) { %>
+    <div id="map" style="width: 400px; height: 300px"></div>
     <h2>Leave a Review</h2>
     <form
       action="/campgrounds/<%= campground._id %>/reviews"
