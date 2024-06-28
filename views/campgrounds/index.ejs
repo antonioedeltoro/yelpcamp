@@ -9,6 +9,7 @@
       <div class="col-md-4">
         <% if (campground.images.length) { %>
         <img
+          crossorigin="anonymous"
           class="img-fluid"
           alt="Image for <%= campground.title %>"
           src="<%= campground.images[0].url %>"
