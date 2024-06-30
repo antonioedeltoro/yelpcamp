@@ -19,7 +19,7 @@ const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 
-const MongoStore = require("connect-mongo");
+const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
 
@@ -50,15 +50,12 @@ app.use(
     replaceWith: "_",
   })
 );
-
 const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 
-const store = MongoStore.create({
-  mongoUrl: dbUrl,
+const store = new MongoDBStore({
+  url: dbUrl,
+  secret,
   touchAfter: 24 * 60 * 60,
-  crypto: {
-    secret: secret,
-  },
 });
 
 store.on("error", function (e) {
@@ -119,7 +116,7 @@ app.use(
         "'self'",
         "blob:",
         "data:",
-        "https://res.cloudinary.com/dru71u48u/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        "https://res.cloudinary.com/douqbebwk/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
         "https://images.unsplash.com/",
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
