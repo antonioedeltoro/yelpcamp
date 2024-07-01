@@ -1,46 +1,51 @@
+/* Body styles */
 body {
-  height: 100vh;
+  height: 100vh; /* Full viewport height */
+  /* Background image with gradient overlay */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("https://images.unsplash.com/photo-1602391833977-358a52198938?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-size: cover;
-  background-position: center;
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5); /* Inset box shadow for background effect */
 }
 
+/* Container for cover content */
 .cover-container {
-  max-width: 60vw;
-  color: white; /* Adjusted to match text color with Bootstrap */
-  margin-top: 2rem; /* Added margin for better spacing */
+  max-width: 60vw; /* Maximum width for the cover content */
+  color: white; /* Text color */
+  margin-top: 2rem; /* Top margin for spacing */
 }
 
+/* Navigation link styles */
 .nav-link {
-  padding: 0.25rem 0;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.5); /* Adjusted initial color */
-  margin-left: 1rem;
-  border-bottom: 0.25rem solid transparent;
-  transition: color 0.2s, border-color 0.2s; /* Smooth transition for hover effect */
+  padding: 0.25rem 0; /* Padding for the navigation links */
+  font-weight: 700; /* Bold font weight */
+  color: rgba(255, 255, 255, 0.5); /* Initial text color */
+  margin-left: 1rem; /* Left margin between navigation links */
+  border-bottom: 0.25rem solid transparent; /* Transparent bottom border */
+  transition: color 0.2s, border-color 0.2s; /* Smooth transition for color and border */
 }
 
 .nav-link:hover {
-  color: white; /* Changed hover color to white */
-  border-bottom-color: white; /* Changed border color on hover */
+  color: white; /* Text color on hover */
+  border-bottom-color: white; /* Bottom border color on hover */
 }
 
 .nav-link.active {
-  color: white;
-  border-bottom-color: white;
+  color: white; /* Active link text color */
+  border-bottom-color: white; /* Active link bottom border color */
 }
 
+/* Button styles */
 .btn-secondary,
 .btn-secondary:hover {
-  color: #333;
-  text-shadow: none;
-  background-color: rgba(255, 255, 255, 0.5); /* Adjusted background color */
-  border: none; /* Removed border */
+  color: #333; /* Button text color */
+  text-shadow: none; /* Remove text shadow on hover */
+  background-color: rgba(255, 255, 255, 0.5); /* Button background color */
+  border: none; /* Remove button border */
 }
 
 .btn-secondary:hover {
-  background-color: white; /* Changed hover background color */
+  background-color: white; /* Button background color on hover */
 }
