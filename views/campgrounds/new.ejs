@@ -1,37 +1,39 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate')%> <!-- Specifies the layout template to be used -->
 <div class="row">
-  <h1 class="text-center">New Campground</h1>
+  <h1 class="text-center">New Campground</h1> <!-- Heading for the New Campground page -->
   <div class="col-md-6 offset-md-3">
+    <!-- Form to create a new campground -->
     <form
-      action="/campgrounds"
-      method="POST"
+      action="/campgrounds" <!-- Form action URL -->
+      method="POST" <!-- Form submission method -->
       novalidate
-      class="validated-form"
-      enctype="multipart/form-data"
+      class="validated-form" <!-- Class for form validation -->
+      enctype="multipart/form-data" <!-- Enables file uploads -->
     >
       <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
+        <label class="form-label" for="title">Title</label> <!-- Label for title input -->
         <input
-          class="form-control"
+          class="form-control" <!-- Bootstrap class for styling -->
           type="text"
           id="title"
           name="campground[title]"
-          required
+          required <!-- Input field for the campground title, required -->
         />
-        <div class="valid-feedback">Looks good!</div>
+        <div class="valid-feedback">Looks good!</div> <!-- Feedback for valid input -->
       </div>
       <div class="mb-3">
-        <label class="form-label" for="location">Location</label>
+        <label class="form-label" for="location">Location</label> <!-- Label for location input -->
         <input
           class="form-control"
           type="text"
           id="location"
           name="campground[location]"
-          required
+          required <!-- Input field for the campground location, required -->
         />
-        <div class="valid-feedback">Looks good!</div>
+        <div class="valid-feedback">Looks good!</div> <!-- Feedback for valid input -->
       </div>
 
+      <!-- Commented out code for image URL input -->
       <!-- <div class="mb-3">
                 <label class="form-label" for="image">Image Url</label>
                 <input class="form-control" type="text" id="image" name="campground[image]" required>
@@ -40,9 +42,9 @@
                 </div>
             </div> -->
       <div class="mb-3">
-        <label class="form-label" for="price">Campground Price</label>
+        <label class="form-label" for="price">Campground Price</label> <!-- Label for price input -->
         <div class="input-group">
-          <span class="input-group-text" id="price-label">$</span>
+          <span class="input-group-text" id="price-label">$</span> <!-- Dollar sign prefix -->
           <input
             type="text"
             class="form-control"
@@ -51,44 +53,44 @@
             aria-label="price"
             aria-describedby="price-label"
             name="campground[price]"
-            required
+            required <!-- Input field for the campground price, required -->
           />
         </div>
-        <div class="valid-feedback">Looks good!</div>
+        <div class="valid-feedback">Looks good!</div> <!-- Feedback for valid input -->
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="description">Description</label>
+        <label class="form-label" for="description">Description</label> <!-- Label for description textarea -->
         <textarea
           class="form-control"
           type="text"
           id="description"
           name="campground[description]"
-          required
+          required <!-- Textarea for the campground description, required -->
         ></textarea>
-        <div class="valid-feedback">Looks good!</div>
+        <div class="valid-feedback">Looks good!</div> <!-- Feedback for valid input -->
       </div>
       <div class="mb-3">
-        <div class="form-file custom-file">
+        <div class="form-file custom-file"> <!-- Custom file input -->
           <input
             type="file"
             class="form-file-input"
             id="image"
             name="image"
-            multiple
+            multiple <!-- Allows multiple file uploads -->
           />
           <label class="form-file-label" for="image">
             <span class="form-file-text custom-file-label"
-              >Choose image(s)...</span
+              >Choose image(s)...</span <!-- Placeholder text for file input -->
             >
-            <span class="form-file-button">Browse</span>
+            <span class="form-file-button">Browse</span> <!-- Browse button -->
           </label>
         </div>
       </div>
       <div class="mb-3">
-        <button class="btn btn-success">Add Campground</button>
+        <button class="btn btn-success">Add Campground</button> <!-- Submit button for the form -->
       </div>
     </form>
-    <a href="/campgrounds">All Campgrounds</a>
+    <a href="/campgrounds">All Campgrounds</a> <!-- Link to go back to All Campgrounds page -->
   </div>
 </div>
