@@ -1,71 +1,156 @@
-<% layout('layouts/boilerplate')%>
+Here's your EJS code with comments added: ```ejs <%
+layout('layouts/boilerplate')%>
+<!-- Specifies the layout template to be used -->
+
 <div class="row">
   <h1 class="text-center">Edit Campground</h1>
+  <!-- Heading for the Edit Campground page -->
+
   <div class="col-md-6 offset-md-3">
+    <!-- Form to edit the campground details -->
     <form
       action="/campgrounds/<%=campground._id%>?_method=PUT"
-      method="POST"
-      novalidate
-      class="validated-form"
-      enctype="multipart/form-data"
+      <!--
+      Form
+      action
+      URL
+      with
+      the
+      campground
+      ID
+      and
+      method
+      override
+      for
+      PUT
+      --
     >
+      method="POST"
+      <!-- Form submission method -->
+      novalidate
+      <!-- Disables browser's default validation -->
+      class="validated-form"
+      <!-- CSS class for the form -->
+      enctype="multipart/form-data"
+      <!-- Form encoding type for file uploads -->
+      >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
+        <!-- Label for the title input field -->
         <input
           class="form-control"
           type="text"
           id="title"
           name="campground[title]"
-          value="<%=campground.title %>"
-          required
+          <!--
+          Name
+          attribute
+          for
+          the
+          title
+          input
+          field
+          --
+        />
+        value="<%=campground.title %>"
+        <!-- Pre-fills the input with the existing campground title -->
+        required
+        <!-- Makes the field required -->
         />
         <div class="valid-feedback">Looks good!</div>
+        <!-- Validation feedback message -->
       </div>
+
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
+        <!-- Label for the location input field -->
         <input
           class="form-control"
           type="text"
           id="location"
           name="campground[location]"
-          value="<%=campground.location %>"
-          required
+          <!--
+          Name
+          attribute
+          for
+          the
+          location
+          input
+          field
+          --
+        />
+        value="<%=campground.location %>"
+        <!-- Pre-fills the input with the existing campground location -->
+        required
+        <!-- Makes the field required -->
         />
         <div class="valid-feedback">Looks good!</div>
+        <!-- Validation feedback message -->
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="price">Campground Price</label>
+        <!-- Label for the price input field -->
         <div class="input-group">
           <span class="input-group-text" id="price-label">$</span>
+          <!-- Dollar sign input group addon -->
           <input
             type="text"
             class="form-control"
             id="price"
             placeholder="0.00"
-            aria-label="price"
-            aria-describedby="price-label"
-            name="campground[price]"
-            value="<%=campground.price %>"
-            required
+            <!--
+            Placeholder
+            text
+            for
+            the
+            price
+            input
+            field
+            --
+          />
+          aria-label="price"
+          <!-- Accessibility label for the price input field -->
+          aria-describedby="price-label"
+          <!-- ID of the element describing the price input field -->
+          name="campground[price]"
+          <!-- Name attribute for the price input field -->
+          value="<%=campground.price %>"
+          <!-- Pre-fills the input with the existing campground price -->
+          required
+          <!-- Makes the field required -->
           />
           <div class="valid-feedback">Looks good!</div>
+          <!-- Validation feedback message -->
         </div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
+        <!-- Label for the description textarea -->
         <textarea
           class="form-control"
           type="text"
           id="description"
           name="campground[description]"
-          required
+          <!--
+          Name
+          attribute
+          for
+          the
+          description
+          textarea
+          --
+        >
+          required <!-- Makes the field required -->
         >
 <%= campground.description%></textarea
         >
+        <!-- Pre-fills the textarea with the existing campground description -->
         <div class="valid-feedback">Looks good!</div>
+        <!-- Validation feedback message -->
       </div>
+
       <div class="mb-3">
         <div class="form-file custom-file">
           <input
@@ -73,35 +158,67 @@
             class="form-file-input"
             id="image"
             name="image"
-            multiple
+            <!--
+            Name
+            attribute
+            for
+            the
+            file
+            input
+            field
+            --
+          />
+          multiple
+          <!-- Allows multiple files to be selected -->
           />
           <label class="form-file-label" for="image">
             <span class="form-file-text custom-file-label"
               >Add more image(s)...</span
             >
+            <!-- Placeholder text for the file input field -->
             <span class="form-file-button">Browse</span>
+            <!-- Button text for the file input field -->
           </label>
         </div>
       </div>
-      <div class="mb-3">
-        <% campground.images.forEach(function(img, i) { %>
 
+      <div class="mb-3">
+        <!-- Loop through the campground images to display thumbnails and delete options -->
+        <% campground.images.forEach(function(img, i) { %>
         <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="" />
+        <!-- Image thumbnail -->
         <div class="form-check-inline">
           <input
             type="checkbox"
             id="image-<%=i%>"
             name="deleteImages[]"
-            value="<%=img.filename%>"
+            <!--
+            Name
+            attribute
+            for
+            the
+            checkbox
+            input
+            field
+            --
+          />
+          value="<%=img.filename%>"
+          <!-- Value attribute with the image filename -->
           />
         </div>
         <label for="image-<%=i%>">Delete?</label>
-        <% })%>
+        <!-- Label for the checkbox input field -->
+        <% }) %>
       </div>
+
       <div class="mb-3">
         <button class="btn btn-info">Update Campground</button>
+        <!-- Submit button for the form -->
       </div>
     </form>
+
     <a href="/campgrounds/<%= campground._id%>">Back To Campground</a>
+    <!-- Link to go back to the campground details page -->
   </div>
 </div>
+```
